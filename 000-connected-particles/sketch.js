@@ -8,7 +8,7 @@ var particles = new Array(N_PARTICLES),
 function setup() {
   createCanvas(windowWidth, windowHeight);
   for (let i = 0; i < particles.length; i++) {
-    particles[i] = new Particle(getRand(width), getRand(height), i);
+    particles[i] = new Particle(i);
   }
 }
 
@@ -26,7 +26,7 @@ function mousePressed() {
 }
 
 class Particle {
-  constructor(x, y, n) {
+  constructor(n, x = getRand(width), y = getRand(height)) {
     this.id = n;
     this.link = [];
     this.p = new p5.Vector(x, y);
@@ -52,7 +52,7 @@ class Particle {
   connect() {
     let lines = 0;
     if (mouse_mode) {
-      let mouse = new Particle(mouseX, mouseY),
+      let mouse = new Particle(null, mouseX, mouseY),
         d = getDistance(this, mouse);
         if (d != 0 && d < DISTANCE) {
           stroke("white");
