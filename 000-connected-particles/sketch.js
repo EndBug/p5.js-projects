@@ -74,7 +74,7 @@ class Particle {
 }
 
 function getDistance(p1, p2) {
-  return sqrt(pow(abs(p1.p.x - p2.p.x), 2) + pow(abs(p1.p.y - p2.p.y), 2));
+  return p1.p.dist(p2.p);
 }
 
 function getRand(max) {
