@@ -11,7 +11,7 @@ const SCREEN = 800,
 var UP, DOWN, RIGHT, LEFT, CONTROLS,
   snake,
   sec,
-  walls = [],
+  walls = [], //You can also add walls, I didn't use them in this example
   food = [],
   world = [],
   status = "start",
@@ -222,7 +222,7 @@ class Snake {
 /**
  * r - Creates a random spot for a box
  *
- * @param  {Number} n Defines the range 
+ * @param  {Number} n Defines the range
  * @return {Number}   A random spot
  */
 function r(n) {
