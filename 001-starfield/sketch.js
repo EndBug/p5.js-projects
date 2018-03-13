@@ -1,5 +1,5 @@
 /**
- * This is my version of this video by The Coding Train https://www.youtube.com/watch?v=17WoOqgXsRM&index=1&list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH
+ * This is my version of this video by The Coding Train: https://www.youtube.com/watch?v=17WoOqgXsRM&index=1&list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH
  */
 
 const N = 100,
