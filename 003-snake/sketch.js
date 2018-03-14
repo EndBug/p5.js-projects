@@ -14,7 +14,7 @@ var UP, DOWN, RIGHT, LEFT, CONTROLS,
   walls = [], //You can also add walls, I didn't use them in this example
   food = [],
   world = [],
-  status = "start",
+  stat = "start",
   font;
 
 //Preload the font
@@ -46,18 +46,18 @@ function draw() {
   if (sec != second()) {
     background(0);
     translate(width / 2, height / 2);
-    if (status == "start") { //start menu
+    if (stat == "start") { //start menu
       fill(255);
       textAlign(CENTER, CENTER);
       textFont(font);
       textSize(72);
       text("SNAKE", 0, 0);
       textSize(16);
-      text(`More or less...\nPress ENTER to start`, 0, height/10);
+      text(`More or less...\nPress ENTER to start`, 0, height / 10);
       textAlign(RIGHT, BOTTOM);
       textSize(8);
-      text("Poorly made by EndBug", width/2.55, height/2);
-    } else if (status == "play") { //actual game
+      text("Poorly made by EndBug", width / 2.55, height / 2);
+    } else if (stat == "play") { //actual game
       fill(255);
       noStroke();
       snake.update();
@@ -66,14 +66,14 @@ function draw() {
       }
       snake.show();
       sec = second();
-    } else if (status == "dead") { //game over screen
-        fill(255);
-        textAlign(CENTER, CENTER);
-        textFont(font);
-        textSize(72);
-        text("GAME OVER", 0, 0);
-        textSize(16);
-        text(`Press ${CONTROLS.new_game[0].toUpperCase()} to start new game...`, 0, height/10);
+    } else if (stat == "dead") { //game over screen
+      fill(255);
+      textAlign(CENTER, CENTER);
+      textFont(font);
+      textSize(72);
+      text("GAME OVER", 0, 0);
+      textSize(16);
+      text(`Press ${CONTROLS.new_game[0].toUpperCase()} to start new game...`, 0, height / 10);
     }
   }
 }
@@ -84,8 +84,8 @@ function keyPressed() {
   else if (pressed(CONTROLS.down)) snake.dir = DOWN;
   else if (pressed(CONTROLS.left)) snake.dir = LEFT;
   else if (pressed(CONTROLS.right)) snake.dir = RIGHT;
-  else if (pressed(CONTROLS.start) && status == "start") status = "play";
-  else if (pressed(CONTROLS.new_game) && status == "dead") status = "play";
+  else if (pressed(CONTROLS.start) && stat == "start") stat = "play";
+  else if (pressed(CONTROLS.new_game) && stat == "dead") stat = "play";
 }
 
 
@@ -114,7 +114,7 @@ p5.Vector.prototype.collidesWith = function(v) {
     }
     return flag;
   } else return (this.x == v.x && this.y == v.y);
-}
+};
 
 
 class Apple {
@@ -167,8 +167,7 @@ class Snake {
 
   //Check if the snake is going to die, grow or move
   update() {
-    let next_p = this.head.copy().add(this.dir),
-      dont = [].concat(walls).concat(this.parts),
+    let dont = [].concat(walls).concat(this.parts),
       dead = false;
     if (this.head.collidesWith(dont)) dead = true;
     for (let i = 0; i < food.length; i++) {
@@ -189,7 +188,7 @@ class Snake {
   grow() {
     let length = this.parts.length;
     if (length == 0) this.future_part = this.head.copy();
-    else this.future_part = this.parts[length-1].copy();
+    else this.future_part = this.parts[length - 1].copy();
   }
 
   //Move the snake and check for canvas borders
@@ -208,7 +207,7 @@ class Snake {
   //Reset the snake and display the "GAME OVER" screen
   die() {
     background(0);
-    status = "dead";
+    stat = "dead";
     this.head = createVector(0, 0);
     world = [this.head];
     this.parts = [];
