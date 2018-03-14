@@ -66,7 +66,7 @@ class Box {
     for (let x = -1; x <= 1; x++) {
       for (let y = -1; y <= 1; y++) {
         for (let z = -1; z <= 1; z++) {
-          let nr = this.s / 3
+          let nr = this.s / 3;
           if (abs(x) + abs(y) + abs(z) > 1) next.push(new Box(this.x + x * nr, this.y + y * nr, this.z + z * nr, nr));
         }
       }
