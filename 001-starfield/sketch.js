@@ -60,4 +60,3 @@ class Star {
     this.v = 1;
   }
 }
->>>>>>> before discard
