@@ -29,7 +29,7 @@ function draw() {
 }
 
 class Cell {
-  constructor(x = width/2, y = height/2, r = cr, tr = cr) {
+  constructor(x = width / 2, y = height / 2, r = cr, tr = cr) {
     if (x != null) {
       this.s = createVector(x, y);
       this.r = r;
@@ -46,7 +46,7 @@ class Cell {
     noStroke();
     //To use colors insead of this poorly made "animal-cell-like" design, use: fill(this.c);
     fill(255, 192, 203, 200);
-    ellipse(this.s.x, this.s.y, this.r*2, this.r*2);
+    ellipse(this.s.x, this.s.y, this.r * 2, this.r * 2);
     fill(199, 21, 133, 200);
     ellipse(this.s.x, this.s.y, this.r, this.r);
   }
@@ -59,7 +59,7 @@ class Cell {
     if (this.s.y + this.r > height) this.s.y -= (this.s.y + this.r) - height;
     else if (this.s.y - this.r < 0) this.s.y += this.r - this.s.y;
     this.d.div(2);
-    this.r -= (this.r - this.tr)/50;
+    this.r -= (this.r - this.tr) / 50;
     if (this.timer <= 0) this.mitosis();
     if (this.r < limit) this.tr = 0;
   }
@@ -73,19 +73,19 @@ class Cell {
   checkColl(cell) {
     let ds = p5.Vector.sub(this.s, cell.s);
     if (ds.mag() == 0) {
-      let v = randomVector()
+      let v = randomVector();
       this.d.add(v);
       cell.d.sub(v);
     } else if (ds.mag() < this.r + cell.r) {
-      this.d.add(ds.copy().div(this.r*2));
-      cell.d.sub(ds.copy().div(cell.r*2));
+      this.d.add(ds.copy().div(this.r * 2));
+      cell.d.sub(ds.copy().div(cell.r * 2));
     }
   }
 
 
   //mitosis - Creates two smaller cells from the first one (the first is resized)
   mitosis() {
-    this.tr *= 2/3;
+    this.tr *= 2 / 3;
     this.timer = randomTimer();
     cells.push(new Cell(this.s.x, this.s.y, this.r, this.tr));
   }
@@ -104,7 +104,7 @@ function mouseClicked() {
 
 //Update the cells' timer
 function updateTime() {
-  for (let cell of cells) cell.timer -= (millis() - ms)*speed;
+  for (let cell of cells) cell.timer -= (millis() - ms) * speed;
   ms = millis();
 }
 
