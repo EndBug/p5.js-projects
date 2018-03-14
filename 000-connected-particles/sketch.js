@@ -14,8 +14,10 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   for (let i = 0; i < particles.length; i++) {
     particles[i] = new Particle(i);
+    console.log("hey");
   }
 }
+
 
 function draw() {
   //Draw and update the particles
@@ -46,7 +48,7 @@ class Particle {
   show() {
     //Draw the particle and check for connections
     stroke(255);
-    strokeWeight(this.r*2);
+    strokeWeight(this.r * 2);
     point(this.p.x, this.p.y);
     this.connect();
   }
@@ -64,15 +66,15 @@ class Particle {
       //If in "mouse mode", create a mouse particle and check for other particles. If in range, draw the line
       let mouse = new Particle(null, mouseX, mouseY),
         d = getDistance(this, mouse);
-        if (d != 0 && d < DISTANCE) {
-          strokeWeight(1);
-          line(this.p.x, this.p.y, mouse.p.x, mouse.p.y);
-          lines++;
-        }
+      if (d != 0 && d < DISTANCE) {
+        strokeWeight(1);
+        line(this.p.x, this.p.y, mouse.p.x, mouse.p.y);
+        lines++;
+      }
     } else {
       //If not in "mouse mode", check for every particle connections, avoiding connections to theirselves and double connections
       for (let part of particles) {
-        let d = getDistance(this, part)
+        let d = getDistance(this, part);
         if (d != 0 && d < DISTANCE && !part.link.includes(this.id)) {
           strokeWeight(1);
           line(this.p.x, this.p.y, part.p.x, part.p.y);
